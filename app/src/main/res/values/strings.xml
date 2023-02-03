@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MyGoodNotes</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+
+
+
+
+
+    </string>
+    <string name="action_settings">Settings</string>
+    <string name="main_activity_title">My Notes</string>
+    <string name="item_note_title">Mi Nota</string>
+    <string name="content_descriptio_ic_clock">The icon shows if the note has a reminder</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_hint">Name</string>
+    <string name="description_hint">Description</string>
+    <string name="add_a_reminder">Add a reminder</string>
+    <string name="hint_date">Date</string>
+    <string name="hint_hour">Hour</string>
+</resources>
