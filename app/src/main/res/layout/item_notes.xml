@@ -3,50 +3,77 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_padding_size_small"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    app:cardElevation="@dimen/margin_padding_size_small"
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <TextView
-            android:id="@+id/tvCardTitle"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/margin_padding_size_medium"
-            android:paddingTop="@dimen/margin_padding_size_small"
-            android:fontFamily="@font/secular"
-            tools:text="@string/item_note_title"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ic_clock"
 
-            />
-
-        <ImageView
-            android:id="@+id/ic_clock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_padding_size_medium"
-            android:contentDescription="@string/content_descriptio_ic_clock"
-            app:layout_constraintStart_toEndOf="@id/tvCardTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/tvCardTitle"
-            tools:src="@drawable/icon_clock"
-            />
-
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_padding_size_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvDescription"
+            >
+            <TextView
+                android:id="@+id/tvCardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_size_small"
+                android:layout_marginStart="@dimen/margin_padding_size_small"
+                android:paddingBottom="@dimen/margin_padding_size_small"
+                android:fontFamily="@font/secular"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/item_note_title"
+                />
+
+            <ImageView
+                android:id="@+id/ic_clock"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/content_descriptio_ic_clock"
+                android:layout_marginEnd="@dimen/margin_padding_size_medium"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/icon_clock"
+                android:visibility="invisible"
+
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/header_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_padding_size_small"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCardTitle"
+            app:layout_constraintTop_toBottomOf="@id/header_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Esto es un ejemplo de una nota comun"
 
             />

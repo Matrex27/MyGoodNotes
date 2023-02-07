@@ -25,4 +25,6 @@
     <string name="add_a_reminder">Add a reminder</string>
     <string name="hint_date">Date</string>
     <string name="hint_hour">Hour</string>
+    <string name="add_note_button">Add</string>
+    <string name="add_note_success">Note successfully added</string>
 </resources>
