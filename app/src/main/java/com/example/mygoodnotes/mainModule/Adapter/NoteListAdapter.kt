@@ -26,6 +26,10 @@ class NoteListAdapter(private val listener: OnClickListener): ListAdapter<NoteEn
 
         fun setListener(noteEntity: NoteEntity){
             binding.root.setOnClickListener { listener.onClick(noteEntity) }
+            binding.root.setOnLongClickListener {
+                listener.onDelete(noteEntity)
+                true
+            }
         }
 
 

@@ -19,6 +19,10 @@ import com.google.android.material.snackbar.Snackbar
 
 class EditNoteFragment : Fragment() {
 
+    //Variable para saber si estamos en modo edicion
+    private var mIsEditMode = false
+    private var noteId: Long = 0
+
     private lateinit var mBinding: FragmentEditNoteBinding
     private lateinit var mFragmentManager: FragmentManager
     private var mActivity: MainActivity? = null
@@ -49,7 +53,6 @@ class EditNoteFragment : Fragment() {
         mBinding.etHour.setOnClickListener { showHourPickerDialog() }
         mBinding.switchReminder.setOnClickListener { isReminder() }
         mBinding.fabBackToMain.setOnClickListener { backToMain() }
-
         mBinding.btnAddNote.setOnClickListener {addNote()}
 
 
@@ -59,16 +62,27 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun setUpViewModel(){
+
+
         mEditViewModel.getNoteSelected().observe(viewLifecycleOwner){
-            updateUi(it)
+
+            mNoteEntity = it ?: NoteEntity()
+
+            if(it != null){
+                mIsEditMode = true
+                noteId = it.id
+                mBinding.btnAddNote.setText(R.string.edit_mode_text_button)
+                updateUi(it)
+            }else{
+                mIsEditMode = false
+            }
         }
-
-
 
     }
 
     private fun addNote(){
-        mNoteEntity = NoteEntity(name = mBinding.noteNameEt.text.toString(),
+        mNoteEntity = NoteEntity(id = noteId,
+                                name = mBinding.noteNameEt.text.toString(),
                                 description = mBinding.noteDescriptionEt.text.toString(),
                                 color = mBinding.noteNameTil.boxBackgroundColor,
                                 isReminder = mBinding.switchReminder.isChecked,
@@ -76,11 +90,20 @@ class EditNoteFragment : Fragment() {
                                 hour = mBinding.etHour.text.toString()
         )
 
-        mEditViewModel.addNote(mNoteEntity!!)
+        if(mIsEditMode == true){
+            mEditViewModel.updateNote(mNoteEntity!!)
+        }else{
+            mEditViewModel.addNote(mNoteEntity!!)
+        }
         backToMain()
 
         mActivity?.binding?.let {
-            Snackbar.make(it.root,R.string.add_note_success, Snackbar.LENGTH_SHORT ).show()
+            if(mIsEditMode){
+                Snackbar.make(it.root,R.string.update_note_success, Snackbar.LENGTH_SHORT ).show()
+            }else{
+                Snackbar.make(it.root,R.string.add_note_success, Snackbar.LENGTH_SHORT ).show()
+            }
+
         }
 
     }

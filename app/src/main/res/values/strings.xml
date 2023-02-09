@@ -27,4 +27,8 @@
     <string name="hint_hour">Hour</string>
     <string name="add_note_button">Add</string>
     <string name="add_note_success">Note successfully added</string>
+    <string name="edit_mode_text_button">Edit</string>
+    <string name="update_note_success">Note updated</string>
+    <string name="update_error">Update error</string>
+    <string name="delete_note_success">Note deleted</string>
 </resources>

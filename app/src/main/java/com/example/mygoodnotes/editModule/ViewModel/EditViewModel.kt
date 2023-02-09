@@ -16,24 +16,40 @@ class EditViewModel: ViewModel() {
         interactor = EditInteractor()
     }
 
+    private var noteId : Long = 0
+
     private var noteSelected = MutableLiveData<NoteEntity>()
+    private var result = MutableLiveData<Any>()
 
 
 
     fun setNoteSelected(noteEntity: NoteEntity){
-        noteSelected.value = noteEntity
+        noteId = noteEntity.id
     }
 
     fun getNoteSelected():LiveData<NoteEntity>{
-        return noteSelected
+        return interactor.getNoteById(noteId)
     }
+
+
 
 
     fun addNote(noteEntity: NoteEntity){
         viewModelScope.launch {
             try {
                 interactor.addNote(noteEntity)
+
             }catch (e: java.lang.Exception){
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun updateNote(noteEntity: NoteEntity){
+        viewModelScope.launch {
+            try {
+                interactor.updateNote(noteEntity)
+            }catch (e: Exception){
                 e.printStackTrace()
             }
         }

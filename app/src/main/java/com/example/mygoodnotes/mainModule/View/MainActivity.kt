@@ -13,6 +13,7 @@ import com.example.mygoodnotes.common.entities.NoteEntity
 import com.example.mygoodnotes.databinding.ActivityMainBinding
 import com.example.mygoodnotes.editModule.ViewModel.EditViewModel
 import com.example.mygoodnotes.mainModule.ViewModel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), OnClickListener {
 
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.fabAddNote.setOnClickListener {launchEditFragment(noteEntity = NoteEntity())}
+        binding.fabAddNote.setOnClickListener {launchEditFragment()}
 
         setUpRecyclerView()
         setUpViewModel()
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
     }
 
-    private fun launchEditFragment(noteEntity: NoteEntity){
+    private fun launchEditFragment(noteEntity: NoteEntity = NoteEntity()){
         val fragment = EditNoteFragment()
 
         mEditViewModel.setNoteSelected(noteEntity)
@@ -85,6 +86,11 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     //Metodos OnClickListener
     override fun onClick(noteEntity: NoteEntity) {
         launchEditFragment(noteEntity)
+    }
+
+    override fun onDelete(noteEntity: NoteEntity) {
+        mViewModel.deleteNote(noteEntity)
+        Snackbar.make(binding.root, R.string.delete_note_success, Snackbar.LENGTH_SHORT).show()
     }
 
 }
