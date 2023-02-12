@@ -1,5 +1,6 @@
 package com.example.mygoodnotes.mainModule.View
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import com.example.mygoodnotes.common.entities.NoteEntity
 import com.example.mygoodnotes.databinding.ActivityMainBinding
 import com.example.mygoodnotes.editModule.ViewModel.EditViewModel
 import com.example.mygoodnotes.mainModule.ViewModel.MainViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), OnClickListener {
@@ -89,8 +91,17 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     }
 
     override fun onDelete(noteEntity: NoteEntity) {
-        mViewModel.deleteNote(noteEntity)
-        Snackbar.make(binding.root, R.string.delete_note_success, Snackbar.LENGTH_SHORT).show()
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.delete_note_alert)
+            .setPositiveButton(R.string.delete_note_alert_confirm, DialogInterface.OnClickListener{ dialogInterface, i ->
+                mViewModel.deleteNote(noteEntity)
+                Snackbar.make(binding.root, R.string.delete_note_success, Snackbar.LENGTH_SHORT).show()
+            })
+            .setNegativeButton(R.string.delete_note_alert_cancel, null)
+            .show()
+
+
     }
 
 }
