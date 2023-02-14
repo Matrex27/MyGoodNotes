@@ -4,7 +4,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mygoodnotes.editModule.View.EditNoteFragment
 import com.example.mygoodnotes.mainModule.Adapter.NoteListAdapter
@@ -69,6 +68,8 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
     }
 
+
+
     private fun launchEditFragment(noteEntity: NoteEntity = NoteEntity()){
         val fragment = EditNoteFragment()
 
@@ -97,12 +98,17 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             .setPositiveButton(R.string.delete_note_alert_confirm, DialogInterface.OnClickListener{ dialogInterface, i ->
                 mViewModel.deleteNote(noteEntity)
                 Snackbar.make(binding.root, R.string.delete_note_success, Snackbar.LENGTH_SHORT).show()
+
             })
             .setNegativeButton(R.string.delete_note_alert_cancel, null)
             .show()
 
 
     }
+
+
+
+
 
 }
 

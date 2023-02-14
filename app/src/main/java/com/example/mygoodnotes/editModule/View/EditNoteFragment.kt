@@ -1,10 +1,12 @@
 package com.example.mygoodnotes.editModule.View
 
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.mygoodnotes.R
@@ -15,6 +17,7 @@ import com.example.mygoodnotes.common.utils.HourPickerFragment
 import com.example.mygoodnotes.databinding.FragmentEditNoteBinding
 import com.example.mygoodnotes.editModule.ViewModel.EditViewModel
 import com.google.android.material.snackbar.Snackbar
+
 
 
 class EditNoteFragment : Fragment() {
@@ -37,7 +40,7 @@ class EditNoteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mEditViewModel = ViewModelProvider(requireActivity()).get(EditViewModel::class.java) //Recuperamos ViewModel
+        mEditViewModel = ViewModelProvider(requireActivity())[EditViewModel::class.java] //Recuperamos ViewModel
 
     }
 
@@ -90,10 +93,11 @@ class EditNoteFragment : Fragment() {
                                 hour = mBinding.etHour.text.toString()
         )
 
-        if(mIsEditMode == true){
+        if(mIsEditMode){
             mEditViewModel.updateNote(mNoteEntity!!)
         }else{
             mEditViewModel.addNote(mNoteEntity!!)
+
         }
         backToMain()
 
@@ -109,6 +113,7 @@ class EditNoteFragment : Fragment() {
     }
 
 
+
     private fun updateUi(noteEntity: NoteEntity){
         mBinding.noteNameTil.setBoxBackgroundColor(noteEntity.color)
         mBinding.noteNameEt.setText(noteEntity.name)
@@ -116,8 +121,8 @@ class EditNoteFragment : Fragment() {
         if (noteEntity.isReminder){
             mBinding.switchReminder.isChecked = true
             isReminder()
-            mBinding.etDate.setText(noteEntity.date)
-            mBinding.etDate.setText(noteEntity.description)
+            mBinding.etDate.setText(noteEntity.date.toString())
+            mBinding.etHour.setText(noteEntity.hour.toString())
         }
 
     }
@@ -183,6 +188,10 @@ class EditNoteFragment : Fragment() {
     private fun onHourSelected(time: String){
         mBinding.etHour.setText(time)
     }
+
+
+
+
 
 
 
